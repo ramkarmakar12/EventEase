@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/providers'
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { adminAuth } from '@/lib/firebase-admin';
+import { cookies } from 'next/headers';
 
 export async function GET() {
   try {
@@ -13,36 +15,55 @@ export async function GET() {
           },
         },
       },
-    })
-    return NextResponse.json(events)
+    });
+    return NextResponse.json(events);
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to fetch events' },
       { status: 500 }
-    )
+    );
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const json = await request.json()
+    // Get session token from cookies
+    const cookieStore = cookies();
+    const sessionCookie = cookieStore.get('session')?.value;
+
+    if (!sessionCookie) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Verify the session cookie and get the user ID
+    const decodedClaim = await adminAuth.verifySessionCookie(sessionCookie);
+    const userId = decodedClaim.uid;
+
+    const body = await request.json();
+    const { title, description, date, location, capacity, isPaid, price } = body;
+
     const event = await prisma.event.create({
       data: {
-        title: json.title,
-        description: json.description,
-        date: new Date(json.date),
-        location: json.location,
-        capacity: json.capacity,
-        isPaid: json.isPaid,
-        price: json.price,
-        ownerId: json.ownerId,
+        title,
+        description,
+        date: new Date(date),
+        location,
+        capacity: parseInt(capacity),
+        isPaid,
+        price: price ? parseFloat(price) : 0,
+        ownerId: userId, // Set the owner ID from the authenticated user
       },
-    })
-    return NextResponse.json(event)
+      include: {
+        owner: true, // Include owner details in the response
+      },
+    });
+
+    return NextResponse.json(event);
   } catch (error) {
+    console.error('Failed to create event:', error);
     return NextResponse.json(
-      { error: 'Failed to create event' },
+      { error: 'Failed to create event', details: (error as Error).message },
       { status: 500 }
-    )
+    );
   }
 }
