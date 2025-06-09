@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+  EVENT_OWNER
+}
+
+model User {
+  id        String    @id // Firebase UID
+  email     String    @unique
+  name      String
+  role      UserRole  @default(EVENT_OWNER)
+  events    Event[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  date        DateTime
+  location    String
+  capacity    Int?
+  isPaid      Boolean  @default(false)
+  price       Float?   @default(0)
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  rsvps       RSVP[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model RSVP {
+  id        String   @id @default(uuid())
+  eventId   String
+  name      String
+  email     String
+  status    String   @default("pending") // pending, confirmed, cancelled
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id])
+
+  @@index([eventId])
+  @@index([email])
+}
