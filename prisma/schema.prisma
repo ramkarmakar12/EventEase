@@ -20,7 +20,7 @@ model User {
   id        String    @id // Firebase UID
   email     String    @unique
   name      String
-  role      UserRole  @default(EVENT_OWNER)
+  role      String  
   events    Event[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
