@@ -9,11 +9,11 @@ export async function NavBar() {
   return (
     <nav className="border-b">
       <div className="container flex items-center justify-between h-16">
-        <Link href="/" className="text-xl font-bold">
+        <Link href="/" className="text-xl font-bold ml-30">
           EventEase
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-end gap-4">
           {user ? (
             <>
               <Link href="/events">

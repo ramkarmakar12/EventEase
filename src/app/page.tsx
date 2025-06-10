@@ -7,11 +7,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
+import type { Event } from '@/types/event'
 
 export default function Home() {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedEventId, setSelectedEventId] = useState('')
+  const [disabledRSVPs, setDisabledRSVPs] = useState<Set<string>>(new Set())
   const router = useRouter()
 
   useEffect(() => {
@@ -54,9 +56,20 @@ export default function Home() {
 
       alert('RSVP successful! You will receive a confirmation email.')
       setSelectedEventId('')
+      // Refresh events after a short delay
+      setTimeout(() => {
+        fetchEvents()
+        setDisabledRSVPs(new Set())
+      }, 2000)
     } catch (error) {
       console.error('Error RSVPing:', error)
       alert('Failed to RSVP. Please try again.')
+      // Remove from disabled set if RSVP failed
+      setDisabledRSVPs(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(selectedEventId)
+        return newSet
+      })
     }
   }
 
@@ -95,12 +108,18 @@ export default function Home() {
             </div>
           </div>
 
+          <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
+          <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event: any) => (
+            {events.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
-                onRSVP={() => setSelectedEventId(event.id)}
+                onRSVP={() => {
+                  setSelectedEventId(event.id)
+                  setDisabledRSVPs(prev => new Set([...prev, event.id]))
+                }}
+                disableRSVP={disabledRSVPs.has(event.id)}
               />
             ))}
           </div>

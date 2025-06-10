@@ -39,14 +39,15 @@ export async function GET(request: Request, { params }: Props) {
   }
 }
 
+import type { ProcessedEventFormData } from '@/components/event-form'
+
 export async function PUT(request: Request, { params }: Props) {
   try {
-    const json = await request.json()
+    const json = await request.json() as ProcessedEventFormData
     const updatedEvent = await prisma.event.update({
       where: {
         id: params.id,
-      },
-      data: {
+      },      data: {
         title: json.title,
         description: json.description,
         date: new Date(json.date),

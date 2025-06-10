@@ -2,23 +2,17 @@ import { formatDistance } from 'date-fns'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
+import type { Event } from '@/types/event'
+
 interface EventCardProps {
-  event: {
-    id: string
-    title: string
-    description: string
-    date: Date
-    location: string
-    capacity?: number
-    isPaid: boolean
-    price?: number
-  }
+  event: Event
   onEdit?: () => void
   onDelete?: () => void
   onRSVP?: () => void
+  disableRSVP?: boolean
 }
 
-export function EventCard({ event, onEdit, onDelete, onRSVP }: EventCardProps) {
+export function EventCard({ event, onEdit, onDelete, onRSVP, disableRSVP }: EventCardProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -43,8 +37,13 @@ export function EventCard({ event, onEdit, onDelete, onRSVP }: EventCardProps) {
       </CardContent>
       <CardFooter className="gap-2">
         {onRSVP && (
-          <Button variant="default" size="sm" onClick={onRSVP}>
-            RSVP
+          <Button 
+            variant="default" 
+            size="sm" 
+            onClick={onRSVP} 
+            disabled={disableRSVP}
+          >
+            {disableRSVP ? 'RSVP Submitted' : 'RSVP'}
           </Button>
         )}
         {onEdit && (

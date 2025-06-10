@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { EventForm } from '@/components/event-form'
+import type { ProcessedEventFormData } from '@/components/event-form'
 
 export default function EditEventPage() {
   const params = useParams()
@@ -27,8 +28,7 @@ export default function EditEventPage() {
       setLoading(false)
     }
   }
-
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: ProcessedEventFormData) => {
     try {
       const response = await fetch(`/api/events/${params.id}`, {
         method: 'PUT',
