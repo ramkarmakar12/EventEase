@@ -1,7 +1,6 @@
 import { formatDistance } from 'date-fns'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-
 import type { Event } from '@/types/event'
 
 interface EventCardProps {
@@ -13,8 +12,16 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, onEdit, onDelete, onRSVP, disableRSVP }: EventCardProps) {
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't navigate if clicking on buttons
+    if ((e.target as HTMLElement).closest('button')) {
+      return
+    }
+    window.location.href = `/events/${event.id}`
+  }
+
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer" onClick={handleCardClick}>
       <CardHeader>
         <CardTitle>{event.title}</CardTitle>
         <p className="text-sm text-gray-500">

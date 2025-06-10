@@ -5,4 +5,7 @@ export async function POST() {
   // Clear the session cookie
   cookies().delete('session')
   
-  return NextResponse.json({ success: true })
+  // Redirect to homepage after signout
+  return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'), {
+    status: 303
+  })
