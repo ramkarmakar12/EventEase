@@ -15,9 +15,10 @@ interface EventCardProps {
   }
   onEdit?: () => void
   onDelete?: () => void
+  onRSVP?: () => void
 }
 
-export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
+export function EventCard({ event, onEdit, onDelete, onRSVP }: EventCardProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -40,20 +41,23 @@ export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
           )}
         </div>
       </CardContent>
-      {(onEdit || onDelete) && (
-        <CardFooter className="gap-2">
-          {onEdit && (
-            <Button variant="outline" size="sm" onClick={onEdit}>
-              Edit
-            </Button>
-          )}
-          {onDelete && (
-            <Button variant="outline" size="sm" onClick={onDelete}>
-              Delete
-            </Button>
-          )}
-        </CardFooter>
-      )}
+      <CardFooter className="gap-2">
+        {onRSVP && (
+          <Button variant="default" size="sm" onClick={onRSVP}>
+            RSVP
+          </Button>
+        )}
+        {onEdit && (
+          <Button variant="outline" size="sm" onClick={onEdit}>
+            Edit
+          </Button>
+        )}
+        {onDelete && (
+          <Button variant="outline" size="sm" onClick={onDelete}>
+            Delete
+          </Button>
+        )}
+      </CardFooter>
     </Card>
   )
 }
