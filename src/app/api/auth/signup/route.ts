@@ -1,5 +1,6 @@
 import { createUser } from "@/lib/auth"
 import { NextResponse } from "next/server"
+import type { UserRole } from "@/lib/auth"
 
 export async function POST(request: Request) {
   try {
@@ -14,15 +15,15 @@ export async function POST(request: Request) {
     }
 
     // Validate role
-    const allowedRoles = ['EVENT_OWNER', 'STAFF']
-    if (role && !allowedRoles.includes(role)) {
+    const allowedRoles: UserRole[] = ['EVENT_OWNER', 'STAFF']
+    if (role && !allowedRoles.includes(role as UserRole)) {
       return NextResponse.json(
         { error: "Invalid role" },
         { status: 400 }
       )
     }
 
-    const { idToken } = await createUser(email, password, name, role)
+    const { idToken } = await createUser(email, password, name, (role || 'EVENT_OWNER') as UserRole)
 
     return NextResponse.json({ idToken })
   } catch (error) {

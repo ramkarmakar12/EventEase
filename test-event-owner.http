@@ -1,0 +1,50 @@
+### Sign up as an event owner
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Test Event Owner",
+  "email": "owner@test.com",
+  "password": "password123",
+  "role": "EVENT_OWNER"
+}
+
+### Create an event (requires auth token from previous response)
+POST http://localhost:3000/api/events
+Content-Type: application/json
+Cookie: session=YOUR_SESSION_TOKEN_HERE
+
+{
+  "title": "Test Event",
+  "description": "This is a test event",
+  "date": "2025-12-25T15:00:00.000Z",
+  "location": "Test Location",
+  "capacity": 100,
+  "isPaid": false
+}
+
+### Edit an event (requires auth token and event ID from previous responses)
+PUT http://localhost:3000/api/events/EVENT_ID_HERE
+Content-Type: application/json
+Cookie: session=YOUR_SESSION_TOKEN_HERE
+
+{
+  "title": "Updated Test Event",
+  "description": "This is an updated test event",
+  "date": "2025-12-26T15:00:00.000Z",
+  "location": "Updated Test Location",
+  "capacity": 150,
+  "isPaid": true,
+  "price": 10.00
+}
+
+### Delete an event (requires auth token and event ID from previous responses)
+DELETE http://localhost:3000/api/events/EVENT_ID_HERE
+Cookie: session=YOUR_SESSION_TOKEN_HERE
+
+// Test instructions:
+// 1. Run the signup request first
+// 2. From the response, copy the session token into YOUR_SESSION_TOKEN_HERE
+// 3. Run the create event request
+// 4. From the response, copy the event ID into EVENT_ID_HERE
+// 5. You can then test editing and deleting the event

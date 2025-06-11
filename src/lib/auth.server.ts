@@ -3,6 +3,13 @@ import { adminAuth } from './firebase-admin';
 import { prisma } from './prisma';
 import type { UserRole } from './auth';
 
+interface SessionUser {
+  id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+}
+
 export async function getSession() {
   try {
     const cookieStore = await cookies();
@@ -24,8 +31,15 @@ export async function getSession() {
 
     if (!user) return null;
 
-    return { user };
-  } catch {
+    // Validate that the role is a valid UserRole
+    if (!['ADMIN', 'STAFF', 'EVENT_OWNER'].includes(user.role as string)) {
+      console.error(`Invalid role found for user ${user.id}: ${user.role}`);
+      return null;
+    }
+
+    return { user: user as SessionUser };
+  } catch (error) {
+    console.error('Session validation error:', error);
     return null;
   }
 }

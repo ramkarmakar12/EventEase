@@ -1,6 +1,6 @@
-# Event Management System
+# EventEase - Event Management System
 
-A modern, full-stack event management application built with Next.js 13+, TypeScript, Prisma, and Firebase Authentication.
+A modern, full-stack event management application built with Next.js 15+, TypeScript, Prisma, and Firebase Authentication.
 
 ## Features
 
@@ -8,11 +8,84 @@ A modern, full-stack event management application built with Next.js 13+, TypeSc
 - 🔐 Secure authentication using Firebase Auth
 - 📧 Email/password and social login support
 - 🔒 Protected routes and API endpoints
-- 👥 Role-based access control (Admin, Staff, User)
+- 👥 Role-based access control (Admin, Event Owner, Staff)
 - 🔑 Session management with secure cookies
+
+### Role-Based Access Control (RBAC)
+
+#### Admin Role
+- 👑 Full system access and control
+- 📊 Access to admin dashboard
+- 👥 Manage all users and their roles
+- 🔧 System configuration management
+- 📝 View and manage audit logs
+- 🎭 Modify any event regardless of ownership
+- 🛡️ Override moderation decisions
+- 📈 Access system-wide analytics
+
+#### Event Owner Role
+- 📅 Create unlimited events
+- ✏️ Edit own events:
+  - Update event details
+  - Modify event capacity
+  - Set ticket prices
+- ❌ Delete own events
+- 📊 View event analytics
+- 👥 Manage event attendees
+- 💰 Handle ticket sales
+- 📬 Send communications to attendees
+- 📝 Respond to event comments
+
+#### Staff Role
+- 🛡️ Access moderation dashboard
+- 🚫 Review and moderate events:
+  - Hide inappropriate events
+  - Flag suspicious content
+  - Review reported events
+- 💬 Moderate comments:
+  - Hide inappropriate comments
+  - Review reported comments
+- 📝 Create moderation logs
+- 🚩 Handle user reports
+- ⚡ Execute quick moderation actions
+- 📋 View moderation queue
+- ❌ Cannot create or edit events
+
+#### Regular User Role
+- 👀 View public events
+- 🎟️ RSVP to events
+- 💬 Comment on events
+- 🔖 Save events
+- 🚩 Report inappropriate content
+- 👤 Manage own profile
+- 📱 Access mobile-friendly features
+- 🔍 Search and filter events
+
+### Permission Matrix
+
+| Action                    | Admin | Event Owner | Staff | User |
+|--------------------------|-------|-------------|--------|------|
+| Create Events            | ✅    | ✅         | ❌    | ❌   |
+| Edit Any Event           | ✅    | ❌         | ❌    | ❌   |
+| Edit Own Events          | ✅    | ✅         | ❌    | ❌   |
+| Delete Any Event         | ✅    | ❌         | ❌    | ❌   |
+| Delete Own Events        | ✅    | ✅         | ❌    | ❌   |
+| Moderate Content         | ✅    | ❌         | ✅    | ❌   |
+| View Admin Dashboard     | ✅    | ❌         | ❌    | ❌   |
+| View Staff Dashboard     | ✅    | ❌         | ✅    | ❌   |
+| Manage Users             | ✅    | ❌         | ❌    | ❌   |
+| View Events              | ✅    | ✅         | ✅    | ✅   |
+| RSVP to Events           | ✅    | ✅         | ✅    | ✅   |
+| Comment on Events        | ✅    | ✅         | ✅    | ✅   |
+| Report Content           | ✅    | ✅         | ✅    | ✅   |
+| View Analytics           | ✅    | Own Only    | ❌    | ❌   |
+| Handle Ticket Sales      | ✅    | Own Only    | ❌    | ❌   |
+
 
 ### Event Management
 - 📅 Create, read, update, and delete events
+- 💰 Support for free and paid events
+- 💲 Event pricing and ticket management
 - 🌍 Public/private event visibility
 - 🎟️ RSVP functionality
 - 📊 Event capacity management
@@ -21,8 +94,26 @@ A modern, full-stack event management application built with Next.js 13+, TypeSc
 - 🔗 Shareable event links
 - 📋 Attendee management
 
+### Event Owner Features
+- 🎭 Dedicated event owner role
+- 📝 Create and manage multiple events
+- 💼 Full control over own events
+- 📈 Event analytics and insights
+- 🎫 Ticket price management
+- 📊 Capacity adjustment
+- 📅 Event scheduling
+
+### Moderation System
+- 🛡️ Content moderation tools for staff
+- 🚫 Event moderation capabilities
+- 💬 Comment moderation system
+- 🚩 Report handling system
+- 📝 Moderation logs
+- 👮 Staff dashboard
+- ⚡ Quick actions for moderators
+
 ### User Experience
-- ⚡ Fast page loads with Next.js 13 App Router
+- ⚡ Fast page loads with Next.js 15 App Router
 - 🎨 Modern UI with Tailwind CSS
 - 💫 Smooth animations and transitions
 - 🔍 Search and filter events
@@ -30,22 +121,58 @@ A modern, full-stack event management application built with Next.js 13+, TypeSc
 - 🌙 Dark/light mode support
 - 🔔 Real-time updates (coming soon)
 
+### Administrative Features
+- 📊 Admin dashboard
+- 👥 User management
+- 📈 System statistics
+- 🔧 System configuration
+- 📝 Audit logs
+- 🎭 Role management
+
 ## Tech Stack
 
-- **Frontend**: Next.js 13+, React, TypeScript, Tailwind CSS
-- **Backend**: Next.js API Routes, Prisma ORM
-- **Database**: PostgreSQL
-- **Authentication**: Firebase Auth
-- **Deployment**: Vercel
-- **State Management**: React Context
-- **Form Handling**: React Hook Form
-- **Styling**: Tailwind CSS, shadcn/ui components
-- **Email**: SendGrid (optional)
+- **Frontend**
+  - Next.js 15+ with App Router
+  - React with TypeScript
+  - Tailwind CSS for styling
+  - shadcn/ui components
+  - React Hook Form for form handling
+  - Zod for validation
+
+- **Backend**
+  - Next.js API Routes
+  - Prisma ORM for database access
+  - Firebase Admin SDK
+  - Model-View-Controller (MVC) architecture
+
+- **Database**
+  - PostgreSQL
+  - Prisma Migrations
+  - Type-safe queries
+
+- **Authentication & Authorization**
+  - Firebase Authentication
+  - Custom session management
+  - Role-based access control (RBAC)
+  - Secure cookie handling
+
+- **Security**
+  - Secure password hashing
+  - Input validation
+  - Secure headers
+
+- **Development & Deployment**
+  - TypeScript for type safety
+  - ESLint for code quality
+  - Prettier for code formatting
+  - Vercel for deployment
+  - Environment variable management
+
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Node.js 18+ 
+- Node.js 22.13.0+ 
 - npm or pnpm
 - PostgreSQL database
 - Firebase project
@@ -88,18 +215,18 @@ cd event
 
 2. Install dependencies:
 ```bash
-pnpm install
+npm install
 ```
 
 3. Set up your database:
 ```bash
-pnpm prisma generate
-pnpm prisma migrate dev
+npm prisma generate
+npm prisma migrate dev
 ```
 
 4. Run the development server:
 ```bash
-pnpm dev
+npm run dev
 ```
 
 The application will be available at `http://localhost:3000`
@@ -108,7 +235,7 @@ The application will be available at `http://localhost:3000`
 
 ```
 src/
-├── app/                  # Next.js 13 App Router pages
+├── app/                  # Next.js 15 App Router pages
 │   ├── api/             # API routes
 │   ├── auth/            # Authentication pages
 │   └── events/          # Event pages
@@ -126,19 +253,45 @@ src/
 - `GET /api/auth/me` - Get current user info
 - `GET /api/auth/session` - Get session data
 
-### Events
-- `GET /api/events` - List all events
+### Admin Routes (Admin Only)
+- `GET /api/admin/stats` - Get system statistics
+- `GET /api/admin/users` - List all users
+- `PUT /api/admin/users/:id` - Update user role/status
+- `DELETE /api/admin/users/:id` - Delete user account
+- `GET /api/admin/audit-logs` - View system audit logs
+- `GET /api/admin/analytics` - System-wide analytics
+
+### Event Owner Routes (Event Owners & Admin)
 - `POST /api/events` - Create new event
+- `GET /api/events/owned` - List owned events
+- `PUT /api/events/:id` - Update own event
+- `DELETE /api/events/:id` - Delete own event
+- `GET /api/events/:id/analytics` - Get event analytics
+- `POST /api/events/:id/announcements` - Send event announcements
+- `GET /api/events/:id/attendees` - List event attendees
+
+### Staff Routes (Staff & Admin)
+- `GET /api/staff/moderation-queue` - Get items needing moderation
+- `PUT /api/staff/events/:eventId/moderate` - Moderate an event
+- `PUT /api/staff/comments/:commentId/hide` - Hide inappropriate comment
+- `GET /api/staff/reports` - List reported content
+- `PUT /api/staff/reports/:reportId` - Handle report
+- `POST /api/staff/moderation-logs` - Create moderation log
+
+### Public Routes (All Authenticated Users)
+- `GET /api/events` - List all public events
 - `GET /api/events/:id` - Get event details
-- `PUT /api/events/:id` - Update event
-- `DELETE /api/events/:id` - Delete event
 - `POST /api/events/:id/rsvp` - RSVP to event
 - `GET /api/events/:id/rsvp/:rsvpId` - Get RSVP status
+- `POST /api/events/:id/comments` - Comment on event
+- `POST /api/reports` - Report inappropriate content
+- `GET /api/users/profile` - Get own profile
+- `PUT /api/users/profile` - Update own profile
 
 ## Key Features Explained
 
 ### Authentication Flow
-1. Users can sign up/sign in using email/password or social providers
+1. Users can sign up/sign in using email/password
 2. Firebase handles the authentication
 3. Session cookies are used for persistent auth
 4. Protected routes check auth status via middleware
@@ -155,6 +308,41 @@ src/
 2. Capacity limits are enforced
 3. RSVP status tracking
 4. Email notifications (optional)
+
+## Testing
+
+### API Testing
+The project includes REST API test files that can be used with REST Client (VS Code extension) or similar tools:
+
+1. Event Owner Testing (`test-event-owner.http`):
+   - Test event owner signup
+   - Test event creation
+   - Test event editing
+   - Test event deletion
+
+### Manual Testing Steps
+
+1. Create different types of users:
+   ```bash
+   # Event Owner
+   curl -X POST http://localhost:3000/api/auth/signup -H "Content-Type: application/json" -d '{"name":"Test Owner","email":"owner@test.com","password":"password123","role":"EVENT_OWNER"}'
+
+   # Staff Member
+   curl -X POST http://localhost:3000/api/auth/signup -H "Content-Type: application/json" -d '{"name":"Test Staff","email":"staff@test.com","password":"password123","role":"STAFF"}'
+   ```
+
+2. Test Event Operations:
+   - Create events as an event owner
+   - Try moderating events as staff
+   - Test paid event creation and management
+   - Verify role-based permissions
+
+3. Test Moderation:
+   - Create test reports
+   - Test comment moderation
+   - Verify staff actions
+   - Check moderation logs
+
 
 ## Contributing
 

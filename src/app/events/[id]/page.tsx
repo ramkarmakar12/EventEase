@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Clock, MapPin, Users, DollarSign, Share2 } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, IndianRupee , Share2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
@@ -229,8 +229,8 @@ export default function EventDetailsPage() {
               )}
               {event.isPaid && (
                 <div className="flex items-center text-sm">
-                  <DollarSign className="w-4 h-4 mr-2" />
-                  ${event.price?.toFixed(2)}
+                  <IndianRupee className="w-4 h-4 mr-2" />
+                  {event.price?.toFixed(2)}
                 </div>
               )}
 

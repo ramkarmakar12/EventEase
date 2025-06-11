@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { adminAuth } from "@/lib/firebase-admin"
+import type { UserRole } from "@/lib/auth"
 
 export async function GET(
   request: Request,
@@ -24,8 +25,8 @@ export async function GET(
       )
     }
 
-    return NextResponse.json(user)
-  } catch (error) {
+    return NextResponse.json(user)  } catch (error) {
+    console.error("Failed to fetch user:", error);
     return NextResponse.json(
       { error: "Failed to fetch user" },
       { status: 500 }
@@ -41,13 +42,26 @@ export async function POST(
     const body = await request.json()
     const { email, name, role } = body
 
+    if (!role || !["ADMIN", "STAFF", "EVENT_OWNER"].includes(role)) {
+      return NextResponse.json(
+        { error: "Invalid role" },
+        { status: 400 }
+      )
+    }
+
     // Create user in database
     const user = await prisma.user.create({
       data: {
         id: params.id,
         email,
         name,
-        role,
+        role: role as UserRole,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
       },
     })
 
