@@ -12,6 +12,8 @@ if signup not working , try with these credentials-
 ### Event owner - remo@gmail.com , password - 123456
 ### staff - remor12@gmail.com , password - 123456
 
+### Note - Some features might not work in deloyement over vercel. Refer to the recording on drive attached.
+
 ## Features
 
 ### Authentication & Authorization
