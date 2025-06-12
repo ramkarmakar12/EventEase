@@ -277,27 +277,6 @@ src/
 - `GET /api/users/profile` - Get own profile
 - `PUT /api/users/profile` - Update own profile
 
-## Key Features Explained
-
-### Authentication Flow
-1. Users can sign up/sign in using email/password
-2. Firebase handles the authentication
-3. Session cookies are used for persistent auth
-4. Protected routes check auth status via middleware
-
-### Event Management
-1. Create events with title, description, date, location, capacity
-2. Set event visibility (public/private)
-3. Manage RSVPs and attendee list
-4. Edit and delete events (owner only)
-5. Share event links with anyone
-
-### RSVP System
-1. Users can RSVP to public events
-2. Capacity limits are enforced
-3. RSVP status tracking
-4. Email notifications (optional)
-
 ## Testing
 
 ### API Testing
