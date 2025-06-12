@@ -319,32 +319,3 @@ The project includes REST API test files that can be used with REST Client (VS C
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## Deployment
-
-### Vercel Deployment
-
-1. Push your code to GitHub
-2. Import your repository to Vercel
-3. Set up environment variables in Vercel dashboard
-4. Deploy!
-
-### Manual Deployment
-
-1. Build the application:
-```bash
-pnpm build
-```
-
-2. Start the production server:
-```bash
-pnpm start
-```
-
-## Acknowledgments
-
-- Next.js team for the amazing framework
-- Vercel for the deployment platform
-- shadcn/ui for beautiful components
-- Prisma team for the great ORM
-- Firebase team for authentication
