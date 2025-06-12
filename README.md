@@ -2,7 +2,7 @@
 
 A modern, full-stack event management application built with Next.js 15+, TypeScript, Prisma, and Firebase Authentication.
 
-Check the walkthrough here : ```https://drive.google.com/file/d/14afycmK3vOLIRwksFsKkFOz8IkkuYK2g/view?usp=drive_link```
+Check the walkthrough here : **https://drive.google.com/file/d/14afycmK3vOLIRwksFsKkFOz8IkkuYK2g/view?usp=drive_link**
 
 Deployed link : ```https://event-ease-two.vercel.app/```
 
