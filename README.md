@@ -8,9 +8,9 @@ Deployed link : ```https://event-ease-two.vercel.app/```
 
 if signup not working , try with these credentials-
 
-Admin - remoramu120@gmail.com , password - 123456
-Event owner - remo@gmail.com , password - 123456
-staff - remor12@gmail.com , password - 123456
+-Admin - remoramu120@gmail.com , password - 123456
+-Event owner - remo@gmail.com , password - 123456
+-staff - remor12@gmail.com , password - 123456
 
 ## Features
 
