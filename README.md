@@ -4,6 +4,14 @@ A modern, full-stack event management application built with Next.js 15+, TypeSc
 
 Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFsKkFOz8IkkuYK2g/view?usp=drive_link`
 
+Deployed link : ```https://event-ease-two.vercel.app/```
+
+if signup not working , try with these credentials-
+
+Admin - remoramu120@gmail.com , password - 123456
+Event owner - remo@gmail.com , password - 123456
+staff - remor12@gmail.com , password - 123456
+
 ## Features
 
 ### Authentication & Authorization
@@ -44,23 +52,13 @@ Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFs
   - Hide inappropriate events
   - Flag suspicious content
   - Review reported events
-- 💬 Moderate comments:
-  - Hide inappropriate comments
-  - Review reported comments
-- 📝 Create moderation logs
 - 🚩 Handle user reports
 - ⚡ Execute quick moderation actions
-- 📋 View moderation queue
 - ❌ Cannot create or edit events
 
 #### Regular User Role
 - 👀 View public events
 - 🎟️ RSVP to events
-- 💬 Comment on events
-- 🔖 Save events
-- 🚩 Report inappropriate content
-- 👤 Manage own profile
-- 📱 Access mobile-friendly features
 - 🔍 Search and filter events
 
 ### Permission Matrix
@@ -88,7 +86,6 @@ Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFs
 - 📅 Create, read, update, and delete events
 - 💰 Support for free and paid events
 - 💲 Event pricing and ticket management
-- 🌍 Public/private event visibility
 - 🎟️ RSVP functionality
 - 📊 Event capacity management
 - 📍 Event location and details
@@ -101,16 +98,12 @@ Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFs
 - 📝 Create and manage multiple events
 - 💼 Full control over own events
 - 📈 Event analytics and insights
-- 🎫 Ticket price management
 - 📊 Capacity adjustment
 - 📅 Event scheduling
 
 ### Moderation System
 - 🛡️ Content moderation tools for staff
 - 🚫 Event moderation capabilities
-- 💬 Comment moderation system
-- 🚩 Report handling system
-- 📝 Moderation logs
 - 👮 Staff dashboard
 - ⚡ Quick actions for moderators
 
@@ -120,15 +113,11 @@ Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFs
 - 💫 Smooth animations and transitions
 - 🔍 Search and filter events
 - 📱 Mobile-first responsive design
-- 🌙 Dark/light mode support
-- 🔔 Real-time updates (coming soon)
 
 ### Administrative Features
 - 📊 Admin dashboard
 - 👥 User management
 - 📈 System statistics
-- 🔧 System configuration
-- 📝 Audit logs
 - 🎭 Role management
 
 ## Tech Stack
@@ -149,8 +138,6 @@ Check the walthrough here : `https://drive.google.com/file/d/14afycmK3vOLIRwksFs
 
 - **Database**
   - PostgreSQL
-  - Prisma Migrations
-  - Type-safe queries
 
 - **Authentication & Authorization**
   - Firebase Authentication
