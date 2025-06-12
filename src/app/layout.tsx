@@ -20,11 +20,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-background flex flex-col">
         <AuthProvider>
-          <Suspense fallback={<div className="h-16 border-b" />}>
-            <NavBar />
-          </Suspense>
-          <main className="container mx-auto py-6 flex-1">{children}</main>
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Suspense fallback={<div className="h-16 border-b" />}>
+              <NavBar />
+            </Suspense>
+            <main className="container mx-auto py-6 flex-1 mb-auto">{children}</main>
+            <Footer />
+          </div>
         </AuthProvider>
       </body>
     </html>
