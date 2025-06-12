@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="w-full border-t border-border/40 bg-background py-6">
       <div className="container flex flex-col  justify-center gap-4 text-center md:gap-6 ml-200">
         <div className="flex gap-4">
-          <p className="text-sm text-muted-foreground ml-40">
+          <p className="text-sm text-muted-foreground">
             Created by Ramkrishna Karmakar
           </p>
           <a
